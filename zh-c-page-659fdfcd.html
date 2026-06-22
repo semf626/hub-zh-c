@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>麻将胡了 · 简明指南与访问提醒</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f2f4f6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+            color: #1e2a3a;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            flex: 1;
+        }
+
+        /* ——— hero ——— */
+        .hero {
+            text-align: center;
+            padding: 72px 16px 56px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0f1a2b;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 640px;
+            margin: 0 auto 28px;
+            font-size: 1.1rem;
+            color: #3b4a5c;
+        }
+
+        .hero .guide-badge {
+            display: inline-block;
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 40px;
+            padding: 8px 24px;
+            font-size: 0.9rem;
+            color: #3b4a5c;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        /* ——— section 卡片 ——— */
+        section {
+            margin-bottom: 40px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e6ec;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0,0,0,0.02);
+            padding: 28px 24px;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #111e2e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h3 i {
+            font-style: normal;
+            background: #eef2f9;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #2563eb;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #2d3d53;
+            margin-bottom: 8px;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            padding: 6px 0;
+            font-size: 0.92rem;
+            color: #2d3d53;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .card ul li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            display: inline-block;
+            width: 18px;
+        }
+
+        /* ——— 说明区 (文字为主) ——— */
+        .explain-block {
+            background: #ffffff;
+            border: 1px solid #e2e6ec;
+            border-radius: 16px;
+            padding: 32px 28px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .explain-block h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0b1a2c;
+            margin-bottom: 20px;
+        }
+
+        .explain-block p {
+            margin-bottom: 16px;
+            font-size: 0.98rem;
+        }
+
+        .explain-block a {
+            color: #1e40af;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+        }
+
+        .explain-block a:hover {
+            color: #0b2b6f;
+        }
+
+        .highlight-box {
+            background: #f7f9fc;
+            border-left: 4px solid #2563eb;
+            padding: 20px 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0 8px;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* ——— FAQ 摘要 ——— */
+        .faq-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+            background: #ffffff;
+            border: 1px solid #e2e6ec;
+            border-radius: 16px;
+            padding: 28px 28px 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .faq-summary h2 {
+            grid-column: 1 / -1;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0b1a2c;
+            margin-bottom: 4px;
+        }
+
+        .faq-item {
+            padding: 8px 0;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #1c2d44;
+            margin-bottom: 4px;
+        }
+
+        .faq-item p {
+            font-size: 0.9rem;
+            color: #3b4a5c;
+        }
+
+        /* ——— footer 底部链接 ——— */
+        .footer-links {
+            text-align: center;
+            padding: 40px 16px 48px;
+            border-top: 1px solid #dce0e6;
+            margin-top: 24px;
+        }
+
+        .footer-links p {
+            font-size: 0.9rem;
+            color: #4a5b6e;
+            max-width: 600px;
+            margin: 0 auto 12px;
+        }
+
+        .footer-links a {
+            color: #1e40af;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: #0b2b6f;
+        }
+
+        .footer-links .sep {
+            color: #9aaaba;
+            margin: 0 8px;
+        }
+
+        /* ——— 响应式 ——— */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                padding: 0 8px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-summary {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .explain-block {
+                padding: 24px 20px;
+            }
+
+            .wrapper {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 48px 8px 40px;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .card {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <!-- hero 区 -->
+    <header class="hero">
+        <h1><span>麻将胡了</span> · 简明指南</h1>
+        <p>从规则速查到访问提醒，一张页面厘清玩法脉络与浏览要点。</p>
+        <div class="guide-badge">面向新参与者和回访用户</div>
+    </header>
+
+    <!-- 优势区（卡片） -->
+    <section>
+        <div class="card-grid">
+            <div class="card">
+                <h3><i>❶</i> 规则轻读</h3>
+                <p>核心牌型、番数计分与特殊组合用表格化速览呈现，避免长篇大论。适合快速重温或初次接触。</p>
+            </div>
+            <div class="card">
+                <h3><i>❷</i> 场景适配</h3>
+                <p>无论使用桌面端还是移动设备，页面结构与卡片排版均做了响应适配，字号与间距保持可读性。</p>
+            </div>
+            <div class="card">
+                <h3><i>❸</i> 参考资源</h3>
+                <p>站点收录多篇战术笔记与术语对照，可作为日常查阅的轻量工具箱。推荐搭配浏览器书签使用。</p>
+            </div>
+            <div class="card">
+                <h3><i>❹</i> 访问提醒</h3>
+                <p>连接稳定性与浏览器兼容性会影响完整体验。建议使用最新版 Chromium 或 Safari，并保持网络通畅。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 说明区：从简明指南和访问提醒展开 -->
+    <section>
+        <div class="explain-block">
+            <h2>从指南到提醒</h2>
+            <p>很多用户反馈，初次接触 <a href="https://zh-c-mahjong.com">麻将胡了</a> 时最需要的是结构清晰的索引——而非一次性灌输所有细节。因此本页将内容拆解为规则速查、常见副露判断、听牌方向提示三个基础模块，每个模块均附有简短的示例说明。</p>
+            <p>同时，站点维护方建议访问前确认以下两点：① 浏览器未禁用 JavaScript 且允许加载字体文件；② 如使用企业网络或公共 Wi-Fi，部分资源可能加载稍慢，属正常现象。若遇到样式错乱，可尝试刷新或清除缓存后重试。</p>
+            <div class="highlight-box">
+                <p>📌 提示：在 <a href="https://zh-c-mahjong.com">麻将胡了</a> 的桌面版帮助中心可以找到更详细的番种表与计分模拟器，移动端建议横屏查看数据表格。</p>
+            </div>
+            <p style="margin-top: 16px;">对于进阶用户，站点内还提供了役满组合的图解和自摸概率计算器（基于剩余牌数），适合在实战间隙对照学习。</p>
+        </div>
+    </section>
+
+    <!-- FAQ 摘要 -->
+    <section>
+        <div class="faq-summary">
+            <h2>FAQ 摘要</h2>
+            <div class="faq-item">
+                <strong>如何快速判断听牌是否有效？</strong>
+                <p>站点内的“听牌检测”工具支持输入手牌并自动列出所有可能和牌型，附带剩余张数统计。适合练习或复盘。</p>
+            </div>
+            <div class="faq-item">
+                <strong>页面上的示例牌谱可以保存吗？</strong>
+                <p>当前版本暂未提供本地保存功能，但牌谱以文本形式展示，可以直接复制或截图。后续或将加入导出功能。</p>
+            </div>
+            <div class="faq-item">
+                <strong>移动端布局会适配刘海屏吗？</strong>
+                <p>页面已采用 safe-area-inset 兼容处理，在主流全面屏设备上按钮和卡片不会被遮挡。</p>
+            </div>
+            <div class="faq-item">
+                <strong>有没有离线使用方案？</strong>
+                <p>站点核心内容依赖在线资源，建议保持网络连接。如果仅查看规则文本，可考虑自行打印 FAQ 页面。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部链接 -->
+    <footer class="footer-links">
+        <p>本页为 <a href="https://zh-c-mahjong.com">麻将胡了</a> 的落地式介绍页，内容仅作指引参考。</p>
+        <p>
+            <a href="https://zh-c-mahjong.com">麻将胡了</a>
+            <span class="sep">·</span>
+            <span>规则 · 术语 · 工具</span>
+        </p>
+        <p style="margin-top: 12px; font-size: 0.85rem; color: #6d7e91;">— 简洁专业 · 信息密度适中 —</p>
+    </footer>
+</div>
+</body>
+</html>
